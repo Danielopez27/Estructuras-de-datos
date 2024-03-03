@@ -22,15 +22,17 @@ public class Stack{
                 pila.push(word);
             }
             
-            for(int j=0; j<length; j++){
+            while(!pila.empty()){    
                 System.out.println(pila.pop());
             }
             
+            scanner.close();
+
+
         }catch(Exception ex){
             System.out.println(ex.getMessage());
         }
         
-
 
 
     }
@@ -42,18 +44,18 @@ public class Stack{
 
 class MyStack<T>{
 
-    private static final int defaultNumber = 5; 
+    private static final int defaultLength = 5; 
     private int top;
     private T[] list;
 
 
     public MyStack(){
-        this(defaultNumber);
+        this(defaultLength);
     }
 
     public MyStack(int length){
         top=0;
-        list = (T[])new Object[length];
+        list = (T[]) new Object[length];
     }
         
     public boolean empty(){
