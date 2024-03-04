@@ -8,20 +8,21 @@ class Queue{
             System.out.println("Ingrese la longitud de la cola: ");
             int length = scanner.nextInt();
 
-            MyQueue<Integer> cola = new MyQueue<>(length);
+            MyQueue<String> cola = new MyQueue<>(length);
 
             System.out.println("Ingrese los elementos de la queue: ");
 
             while(!cola.full()){
-                int item = scanner.nextInt();
-                cola.enqueue(item);
+                String word = scanner.next();
+                cola.enqueue(word);
             }
 
             while(!cola.empty()) {
                 System.out.println(cola.dequeue());
             }
 
-            
+
+
             scanner.close();
 
         
