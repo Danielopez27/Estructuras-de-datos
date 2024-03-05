@@ -120,7 +120,7 @@ class MySinglyLinkedList<T>{
         }
     }
 
-    public Boolean Find(T key){
+    public boolean Find(T key){
         boolean notFind = true;
         Node<T> node = new Node<>(null);
         
@@ -135,9 +135,100 @@ class MySinglyLinkedList<T>{
         return !notFind;
     }
 
-    public void erase(T key){
+    public void erase(T key) throws Exception{
         
+        try {
+
+            if(head == null){
+                throw new Exception("erase invalido. Lista vacia.");
+            }
+            if(head.key == key){
+                head = head.next;
+
+                if(head == null){
+                    tail = null;
+                }
+
+            }else{
+
+                Node<T> node = new Node<>(null);
+                node = head;
+
+                while(node.next.key != key && node != tail) {
+                    node = node.next;
+                }
+
+                if(node != tail){
+                    node.next = node.next.next;
+
+                    if(node.next == null){
+                        tail = node;
+                    }
+                }else{
+                    throw new Exception("erase invalido. Elemento no encontrado");
+                }
+                    
+            }
+            
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+   
     }
 
+    public boolean empty(){
+        return head == null;
+    }
+
+    public void addBefore(Node<T> node, T key) throws Exception {
+        
+        try {
+            if(head == null){
+                throw new Exception("addBefore invalido. Lista vacia");
+            }
+
+            Node<T> refNode = new Node<>(null);
+            Node<T> newNode = new Node<>(key);
+            
+            if(head == node){
+                newNode.next = head.next;
+                head = newNode;
+
+            }else{
+
+                refNode = head;
+
+                while(refNode.next != node && refNode != tail) {
+                    refNode = refNode.next;
+                }
+                
+                if(refNode != tail){
+                    newNode.next = refNode.next;
+                    refNode.next = newNode;
+                }else{
+                    throw new Exception("addBefore invalido. Nodo no encontrado");
+                }
+
+            }
+
+            
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
+    }
+
+    public void addAfter(Node<T> node, T key){
+        Node<T> newNode = new Node<>(key);
+
+        newNode.next = node.next;
+        node.next = newNode;
+
+        if(tail == node) {
+            tail = newNode;
+        }
+
+    }
 
 }
