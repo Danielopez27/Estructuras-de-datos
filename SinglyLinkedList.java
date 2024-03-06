@@ -7,9 +7,25 @@ class SinglyLinkedList{
         try{
             Scanner scanner = new Scanner(System.in);
             
-            System.out.println("Ingrese la longitud del la lista enlazada: ");
+            System.out.println("Ingrese la longitud de la lista enlazada: ");
             int length = scanner.nextInt();
-        
+
+            System.out.println("Ingrese los elementos de la lista enlazada: ");
+            
+            MySinglyLinkedList<Integer> listaEnlazada = new MySinglyLinkedList<>();
+
+            while(length > 0){
+                int elemento = scanner.nextInt();
+                listaEnlazada.pushFront(elemento);
+
+                length--;
+            }
+
+            while(!listaEnlazada.empty()) {
+                System.out.println(listaEnlazada.topFront());
+
+                listaEnlazada.popFront();
+            }
             
 
             scanner.close();
@@ -219,7 +235,8 @@ class MySinglyLinkedList<T>{
 
     }
 
-    public void addAfter(Node<T> node, T key){
+    public void addAfter(Node<T> node, T key) throws Exception {
+            
         Node<T> newNode = new Node<>(key);
 
         newNode.next = node.next;
@@ -228,6 +245,9 @@ class MySinglyLinkedList<T>{
         if(tail == node) {
             tail = newNode;
         }
+
+        
+        
 
     }
 
