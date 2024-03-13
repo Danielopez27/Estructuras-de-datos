@@ -68,7 +68,7 @@ class MyStack<T>{
 
     public T pop() throws Exception{
         if(empty()){
-            throw new Exception("Stack vacia");
+            throw new Exception("---------- .pop() invalido. Stack vacia ----------");
         }
 
         top--;
@@ -77,7 +77,7 @@ class MyStack<T>{
 
     public void push(T item) throws Exception{
         if(full()){
-            throw new Exception("Stack llena");
+            throw new Exception("---------- .push() invalido. Stack llena ----------");
         }
         
         list[top] = item;

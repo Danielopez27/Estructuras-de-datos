@@ -77,17 +77,13 @@ class MySinglyLinkedList<T>{
     }
 
     public void popFront() throws Exception{
-        try{
 
-            if(head==null){
-                throw new Exception("popFront invalido. Lista vacia.");
-            }else{
-                head = head.next;   //Averiguar si es necesario borrar el nodo.
-            }
-
-        }catch(Exception ex){
-            System.out.println(ex.getMessage());
+        if(head==null){
+            throw new Exception("---------- .popFront() invalido. Lista vacia ----------");
+        }else{
+            head = head.next;   //Averiguar si es necesario borrar el nodo.
         }
+
     }
 
     public void pushBack(T key){
@@ -108,32 +104,27 @@ class MySinglyLinkedList<T>{
     }
 
     public void popBack() throws Exception{
-        
-        try {
 
-            if(head == null){
-                throw new Exception("popBack invalido. Lista vacia");
-            }
-            if(head == tail){
-                head = null;
-                tail = null;
-            }else{
-
-                Node<T> temp = new Node<>(null);
-                temp = head;
-
-                while(temp.next.next != null) {
-                    temp = temp.next;
-                }
-
-                temp.next = null;
-                tail = temp;
-
-            }
-
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+        if(head == null){
+            throw new Exception("---------- .popBack() invalido. Lista vacia ----------");
         }
+        if(head == tail){
+            head = null;
+            tail = null;
+        }else{
+
+            Node<T> temp = new Node<>(null);
+            temp = head;
+
+            while(temp.next.next != null) {
+                temp = temp.next;
+            }
+
+            temp.next = null;
+            tail = temp;
+
+        }
+
     }
 
     public boolean Find(T key){
@@ -152,44 +143,38 @@ class MySinglyLinkedList<T>{
     }
 
     public void erase(T key) throws Exception{
-        
-        try {
+
+        if(head == null){
+            throw new Exception("---------- .erase() invalido. Lista vacia ----------");
+        }
+        if(head.key == key){
+            head = head.next;
 
             if(head == null){
-                throw new Exception("erase invalido. Lista vacia.");
+                tail = null;
             }
-            if(head.key == key){
-                head = head.next;
 
-                if(head == null){
-                    tail = null;
+        }else{
+
+            Node<T> node = new Node<>(null);
+            node = head;
+
+            while(node.next.key != key && node != tail) {
+                node = node.next;
+            }
+
+            if(node != tail){
+                node.next = node.next.next;
+
+                if(node.next == null){
+                    tail = node;
                 }
-
             }else{
-
-                Node<T> node = new Node<>(null);
-                node = head;
-
-                while(node.next.key != key && node != tail) {
-                    node = node.next;
-                }
-
-                if(node != tail){
-                    node.next = node.next.next;
-
-                    if(node.next == null){
-                        tail = node;
-                    }
-                }else{
-                    throw new Exception("erase invalido. Elemento no encontrado");
-                }
-                    
+                throw new Exception("---------- .erase() invalido. Elemento no encontrado ----------");
             }
-            
-
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+                
         }
+            
    
     }
 
@@ -199,39 +184,34 @@ class MySinglyLinkedList<T>{
 
     public void addBefore(Node<T> node, T key) throws Exception {
         
-        try {
-            if(head == null){
-                throw new Exception("addBefore invalido. Lista vacia");
-            }
-
-            Node<T> refNode = new Node<>(null);
-            Node<T> newNode = new Node<>(key);
-            
-            if(head == node){
-                newNode.next = head.next;
-                head = newNode;
-
-            }else{
-
-                refNode = head;
-
-                while(refNode.next != node && refNode != tail) {
-                    refNode = refNode.next;
-                }
-                
-                if(refNode != tail){
-                    newNode.next = refNode.next;
-                    refNode.next = newNode;
-                }else{
-                    throw new Exception("addBefore invalido. Nodo no encontrado");
-                }
-
-            }
-
-            
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+        
+        if(head == null){
+            throw new Exception("---------- .addBefore() invalido. Lista vacia ----------");
         }
+
+        Node<T> refNode = new Node<>(null);
+        Node<T> newNode = new Node<>(key);
+            
+        if(head == node){
+            newNode.next = head.next;
+            head = newNode;
+
+        }else{
+
+            refNode = head;
+
+            while(refNode.next != node && refNode != tail) {
+                refNode = refNode.next;
+            }
+                
+            if(refNode != tail){
+                newNode.next = refNode.next;
+                refNode.next = newNode;
+            }else{
+                throw new Exception("---------- .addBefore() invalido. Nodo no encontrado ----------");
+            }
+
+            }
 
     }
 

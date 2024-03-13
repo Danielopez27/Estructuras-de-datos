@@ -64,7 +64,7 @@ class MyQueue<T>{
 
     public void enqueue(T item) throws Exception {
         if(full()){
-            throw new Exception("Queue llena.");
+            throw new Exception("---------- .enqueue() invalido. Queue llena ----------");
         }
         
         list[rear]= item;
@@ -74,7 +74,7 @@ class MyQueue<T>{
 
     public T dequeue() throws Exception {
         if(empty()){
-            throw new Exception("Queue vacia.");
+            throw new Exception("---------- .dequeue() invalido. Queue vacia ----------");
         }
 
         T item = null;
