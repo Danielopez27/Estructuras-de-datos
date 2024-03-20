@@ -1,6 +1,8 @@
 package Ejercicios;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
 
 class PrintingTime {
 
@@ -8,23 +10,29 @@ class PrintingTime {
 
         try {
 
-            Scanner scanner = new Scanner(System.in);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     
+            String[] line;
             int minutes;
-            int cases = scanner.nextInt();
+            int cases = Integer.parseInt(reader.readLine());
             
             for(int i=0; i<cases; i++){
-                int length = scanner.nextInt();
-                int index = scanner.nextInt();
+
+                line = reader.readLine().split(" ");
+                
+                int length = Integer.parseInt(line[0]);
+                int index = Integer.parseInt(line[1]);
+                
                 minutes = 0;
 
                 if(length != 0){
 
                     MyQueue queue = new MyQueue(length);
-    
-                    for (int j=0; j<length; j++) {
-                        int item = scanner.nextInt();
-                        queue.enqueue(item);
+                    line = reader.readLine().split(" ");
+
+                    for (String item: line) {
+                        int num = Integer.parseInt(item);
+                        queue.enqueue(num);
                     }
     
                     boolean printed = false;
@@ -66,7 +74,6 @@ class PrintingTime {
             }
 
 
-            scanner.close();
 
         } catch (Exception e) {
             System.out.println(e.getMessage());

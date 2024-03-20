@@ -1,101 +1,81 @@
 package Ejercicios;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+//import java.util.Scanner;
 
 /**
  * WeirdText
  */
-public class WeirdText {
+class WeirdText {
 
     public  static void main(String[] args){
 
         try {
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             
-            Scanner scanner = new Scanner(System.in);
+            //Scanner scanner = new Scanner(System.in);
 
             String line = "";
-            String reference = "";
+
             MySinglyLinkedList linkedList = new MySinglyLinkedList();
 
             while (line.compareTo("EOF") != 0) {
                 
-                line = scanner.nextLine();
+                //line = scanner.nextLine();
+                line = reader.readLine();
+
                 boolean end = true;
 
-                while (line.contains("[") || line.contains("]")) {
-                    
-                    if(line.indexOf("[") != -1 && line.indexOf("]") != -1){
-                        
-                        if(line.indexOf("[") < line.indexOf("]")){
-                        
-                            reference = line.substring(0, line.indexOf("["));
-                            line = line.substring(line.indexOf("[") + 1);         // TODO:puede salirse el index
-    
+                StringBuilder weirdText = new StringBuilder();
+
+
+                for(int i=0; i<line.length(); i++){
+
+                    if(line.charAt(i) == '[' || line.charAt(i) == ']'){
+
+                        if(line.charAt(i) == '['){
+
                             if(end == true){
-                                linkedList.pushBack(reference);
+                                linkedList.pushBack(weirdText);
                             }else{
-                                linkedList.pushFront(reference);
+                                linkedList.pushFront(weirdText);
                             }
-    
+            
                             end = false;
     
+                            weirdText.delete(0, weirdText.length());
+    
                         }
-    
-                        if(line.indexOf("]") < line.indexOf("[")){
-    
-                            reference = line.substring(0, line.indexOf("]"));
-                            line = line.substring(line.indexOf("]") + 1);       // TODO:puede salirse el index
+                        if(line.charAt(i) == ']'){
     
                             if(end == true){
-                                linkedList.pushBack(reference);
+                                linkedList.pushBack(weirdText);
                             }else{
-                                linkedList.pushFront(reference);
+                                linkedList.pushFront(weirdText);
                             }
-    
+            
                             end = true;
+    
+                            weirdText.delete(0, weirdText.length());
     
                         }
 
                     }else{
 
-                        if(line.contains("[")){
-
-                            reference = line.substring(0, line.indexOf("["));
-                            line = line.substring(line.indexOf("[") + 1);           // TODO:puede salirse el index
-    
-                            if(end == true){
-                                linkedList.pushBack(reference);
-                            }else{
-                                linkedList.pushFront(reference);
-                            }
-    
-                            end = false;
-
-                        }else{
-
-                            reference = line.substring(0, line.indexOf("]"));
-                            line = line.substring(line.indexOf("]") + 1);           // TODO:puede salirse el index
-    
-                            if(end == true){
-                                linkedList.pushBack(reference);
-                            }else{
-                                linkedList.pushFront(reference);
-                            }
-    
-                            end = true;
-
-                        }
+                        weirdText.append(line.charAt(i));
 
                     }
-    
+
                 }
 
                 if(line.compareTo("EOF") != 0){
 
                     if(end == true){
-                        linkedList.pushBack(line);
+                        linkedList.pushBack(weirdText);
                     }else{
-                        linkedList.pushFront(line);
+                        linkedList.pushFront(weirdText);
                     }
                 }
 
@@ -112,10 +92,10 @@ public class WeirdText {
 
 
     
-            scanner.close();
+            //scanner.close();
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.toString());
         }
 
 
@@ -137,6 +117,11 @@ class MySinglyLinkedList{
         private String key;
         private Node next;
 
+        public Node(StringBuilder item){
+            this.key = item.toString();
+            this.next = null;
+        }
+
         public Node(String item){
             this.key = item;
             this.next = null;
@@ -149,7 +134,7 @@ class MySinglyLinkedList{
         this.tail = null;
     }
 
-    public void pushFront(String key){
+    public void pushFront(StringBuilder key){
         Node node = new Node(key);
 
         node.next=head;
@@ -160,7 +145,7 @@ class MySinglyLinkedList{
         }
     }
 
-    public void pushBack(String key){
+    public void pushBack(StringBuilder key){
         Node node = new Node(key);
 
         if(tail == null){
@@ -181,7 +166,7 @@ class MySinglyLinkedList{
         
         StringBuilder solution = new StringBuilder();
         
-        Node node = new Node(null);
+        Node node = new Node("");
 
         node = head;
 
